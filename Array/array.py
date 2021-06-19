@@ -1,61 +1,44 @@
-# Accessing/Traversing the list
+import numpy as np
 
-shoppingList = ['Milk', 'Cheese', 'Butter']
+twoDArray = np.array([[11, 15, 10, 6], [10, 14, 11, 5], [12, 17, 12, 8], [15, 18, 14, 9] ])
+print(twoDArray)
 
-for i in range(len(shoppingList)):
-    shoppingList[i] = shoppingList[i]+"+"
-    # print(shoppingList[i])
-empty = []
-for i in empty:
-    print("I am empty")
+# newTwoDArray = np.insert(twoDArray, 1, [[1,2,3,4]], axis=0)
+# print(newTwoDArray)
 
+print(len(twoDArray))
 
-# Update/Insert - List 
+newTwoDArray = np.append(twoDArray, [[1,2,3,4]], axis=0)
+print(newTwoDArray)
+print(len(newTwoDArray))
+print(len(newTwoDArray[0]))
 
-myList = [1,2,3,4,5,6,7]
-print(myList)
-myList.insert(4,15)
+def accessElements(array, rowIndex, colIndex):
+    if rowIndex >= len(array) and colIndex >= len(array[0]):
+        print('Incorrect Index')
+    else:
+        print(array[rowIndex][colIndex])
 
-myList.append(55)
+accessElements(newTwoDArray, 1, 2)
 
-newList = [11,12,13,14]
-myList.extend(newList)
-print(myList)
-
-
-#  Searching for an element in the List
-myList =  [10,20,30,40,50,60,70,80,90]
-
-def searchinList(list, value):
-    for i in list:
-        if i == value:
-            return list.index(value)
-    return 'The value does not exist in the list'
-
-print(searchinList(myList, 100))
+def traverseTDArray(array):
+    for i in range(len(array)):
+        for j in range(len(array[0])):
+            print(array[i][j])
 
 
-#  List operations / functions
-total = 0 
-count = 0
-while (True):
-    inp = input('Enter a number: ') 
-    if inp == 'done': break
-    value = float(inp)
-    total = total + value
-    count = count + 1 
-    average = total / count
-					
-print('Average:', average)
+traverseTDArray(twoDArray)
 
 
+def searchTDArray(array, value):
+    for i in range(len(array)):
+        for j in range(len(array[0])):
+            if array[i][j] == value:
+                return 'The value is located index '+str(i)+" "+str(j)
+    return 'The element no found'
 
-numlist = list() 
-while (True):
-    inp = input('Enter a number: ') 
-    if inp == 'done': break
-    value = float(inp)
-    numlist.append(value)
-					
-average = sum(numlist) / len(numlist) 
-print('Average:', average)
+
+print(searchTDArray(twoDArray, 444))
+
+newTDArray = np.delete(twoDArray, 1, axis=1)
+print(newTDArray)
